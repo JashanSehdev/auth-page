@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
 import { addProduct } from "../../../feature/product/product.slice";
 import { Button } from "@mui/material";
+import FormDescription from "../form-description";
 
 export default function AddProductForm() {
   const dispatch = useDispatch<AppDispatch>();
@@ -41,16 +42,23 @@ export default function AddProductForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
       <FormField
-        type="Product_name"
+        type="text"
         placeholder="Product name"
         name="product_name"
         register={register}
         error={errors.product_name}
       />
-      <FormField
+      {/* <FormField
         type="text"
         placeholder="Description"
         name="description"
+        register={register}
+        error={errors.description}
+      /> */}
+      <FormDescription
+        type="text"
+        placeholder = "Product Description"
+        name = "description"
         register={register}
         error={errors.description}
       />
