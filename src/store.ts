@@ -3,6 +3,7 @@ import authSlice from './feature/auth/auth.slice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from "redux-persist/lib/storage";
 import productSlice from './feature/product/product.slice'
+import cartSlice from './feature/cart/cart.slice'
 
 const persistConfig = {
     key: 'root',
@@ -13,9 +14,14 @@ const persistedAuthReducer = persistReducer(persistConfig, authSlice);
 
 const persistedProductReducer = persistReducer(persistConfig, productSlice)
 
+const persistedCartReducer = persistReducer(persistConfig, cartSlice)
 
 export const store = configureStore({
-    reducer: {auth : persistedAuthReducer, product : persistedProductReducer},
+    reducer: {
+      auth : persistedAuthReducer, 
+      product : persistedProductReducer,
+      cart : persistedCartReducer
+    },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
