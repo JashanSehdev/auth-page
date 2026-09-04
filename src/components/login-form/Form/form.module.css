@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: auto;
+
+
+}
+
+.error {
+    color: red;
+    width: fit-content ;
+    margin: auto;
+}
+.submit_button {
+
+    background-color: blueviolet;
+    color: white;
+    font-size: larger;
+    padding: 1rem;
+}       
+
+span {
+    margin-left:0.5rem;
+    cursor: pointer;
+    color: blueviolet;
+}
