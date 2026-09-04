@@ -60,7 +60,7 @@ const PasswordField: React.FC<FormFieldProps> = ({
             }
             label="Password"
           />
-           { error?.message && <p>{error.message}</p>}
+         { error?.message &&  <FormHelperText error={false} >{error.message}</FormHelperText>}
         </FormControl>
         
         </>

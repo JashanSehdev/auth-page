@@ -8,29 +8,47 @@ import { addUser, login } from "../../../feature/auth/auth.slice";
 import { User } from "../../../feature/auth/auth.type";
 import { AppDispatch, RootState } from "../../../store";
 import styles from './form.module.css'
-import { error } from "console";
+import { error, log } from "console";
+import { useState } from "react";
+import SimpleSnackbar from "../snack-bar";
 
 
 function LoginForm() {
   const dispatch = useDispatch<AppDispatch>();
   const users = useSelector((State : RootState) => State.auth.users)
-  const user = useSelector((State:RootState) => State.auth.user)
+
+  const [error, setError] = useState<string>("");
   
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<FormData>({
     resolver: zodResolver(signUpSchema)
   });
 
   const onSubmit = async (data: FormData) => {
+    const user = users.find((u) => u.email === data.email);
+
+    if (!user) {
+      setError("User not found")
+      return;
+    }
+
+    if (user.password !== data.password) {
+      setError("Password is Incorrect");
+      return;
+    }
+
     dispatch(login({email : data.email, password : data.password}))
+    setError("")
   }
 
+  console.log(error)
   return (
-      <form  onSubmit={handleSubmit(onSubmit)} className={styles.container}>
+      <div>
+        <SimpleSnackbar error={error}/>
+        <form  onSubmit={handleSubmit(onSubmit)} className={styles.container}>
           <FormField
             type="email"
             placeholder="Email"
@@ -57,7 +75,10 @@ function LoginForm() {
           <button type="submit" className={styles.submit_button}>
             Submit
           </button>
+          
       </form>
+      </div>
+      
   );
 }
 

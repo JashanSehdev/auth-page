@@ -1,6 +1,6 @@
 export type InitialAuthState = {
     users : User[],
-    user : User | undefined
+    user : User | undefined,
 }
 
 export type IntitialUserState = {
