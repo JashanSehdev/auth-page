@@ -1,3 +1,5 @@
+import z from "zod"
+
 export type InitialAuthState = {
     users : User[],
     user : User | undefined,
@@ -10,9 +12,10 @@ export type IntitialUserState = {
 export type User = {
     name : string,
     email : string,
-    role : string,
+    role : Role,
     password : string
 }
+
 
 export enum Role {
     vendor = "vendor",

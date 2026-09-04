@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InitialAuthState, User } from "./auth.type";
-import { useDispatch } from "react-redux";
-import { email } from "zod";
 
 const initialState : InitialAuthState = {
     users : [],

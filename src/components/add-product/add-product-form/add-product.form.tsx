@@ -3,7 +3,6 @@ import styles from './add-product.module.css'
 import {
   AddProductSchemaInput,
   AddProductSchemaOutput,
-  FormData,
   addProductSchema,
 } from "../type/add-product.type";
 import FormField from "../form-field/form-field";
@@ -16,14 +15,12 @@ import FormDescription from "../form-description";
 
 export default function AddProductForm() {
   const dispatch = useDispatch<AppDispatch>();
-  const product = useSelector((state: RootState) => state.product.products);
   const user = useSelector((state: RootState) => state.auth.user);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<AddProductSchemaInput, any, AddProductSchemaOutput>({
     resolver: zodResolver(addProductSchema),
     defaultValues: {

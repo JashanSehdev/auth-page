@@ -1,13 +1,7 @@
 import { FieldError, UseFormRegister } from "react-hook-form";
-import {z, ZodType} from "zod";
+import {z} from "zod";
+import { Role } from "../../feature/auth/auth.type";
 
-// export type FormData = {
-//     name: string,
-//     email: string,
-//     password: string,
-//     confirmPassword: string,
-//     role : string
-// }
 
 export type FormData = z.infer<typeof signUpSchema>
 export const signUpSchema = z.object({
@@ -15,8 +9,9 @@ export const signUpSchema = z.object({
     name : z.string().min(1, {message : "Name required"}),
     password : z.string().min(6, { message : "Password should be atleast 6 words"}).max(20),
     confirmPassword : z.string().min(1, {message : "confirm password requied"}),
-    role : z.string()
+    role : z.nativeEnum(Role)
 })
+
 .refine((data) => data.password === data.confirmPassword , {
     message : "Password do not match",
     path: ["confirmPassword"]
