@@ -11,7 +11,11 @@ export default function Signup () {
     const navigate = useNavigate()
     useEffect(() => {
         if (user) {
-            navigate("/")
+            if (user.role === "vendor") {
+                navigate('/dashboard')
+            } else {
+                navigate('/')
+            }
         }
     }, [user, navigate])
     return (

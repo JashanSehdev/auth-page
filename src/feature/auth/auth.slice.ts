@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InitialAuthState, User } from "./auth.type";
-import { useDispatch } from "react-redux";
 
 const initialState : InitialAuthState = {
     users : [],
-    user  : undefined
+    user  : undefined,
 }
 
 const authSlice = createSlice({
@@ -27,9 +26,21 @@ const authSlice = createSlice({
         }, 
 
         login : (state, action : PayloadAction<{email: string, password : string}>) => {
-            if (state.users.some((user) => user.email === action.payload.email && user.password === action.payload.password)) {
-                state.user = state.users.find((user) => user.email === action.payload.email) 
+
+            const user = state.users.find((u) => u.email === action.payload.email)
+
+            if (!user) {
+                console.error("User not found")
+                return;
             }
+
+            if (user.password !== action.payload.password) {
+                console.error("Password not correct")
+                return;
+            }
+
+            state.user = user;
+            
         },
 
         logout : (state) => {

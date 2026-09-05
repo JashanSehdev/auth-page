@@ -8,7 +8,7 @@ export default function Navbar () {
     const dispatch = useDispatch()
     return (
         <div className={styles.container}>
-            <div className={styles.logo}>Zenmonk</div>
+            <div className={styles.logo}>Nopo</div>
             {
                 user ? <button onClick={() => {dispatch(logout())}}>LogOut</button> : <p></p>
             }
