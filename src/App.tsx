@@ -8,6 +8,7 @@ import Login from './pages/login/login.page';
 import PrivateRoute from './Routing/privateRoute';
 import Navbar from './components/navbar/navbar';
 import Home from './pages/Home/Home.page'
+import Wishlist from './pages/wishlist/wishlist.page';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route element={<PrivateRoute />} >
             <Route path={"/dashboard"} element={<Dashboard/>} />
             <Route path={"/"} element={<Home/>} />
+            <Route path={"/wishlist"} element={<Wishlist/>} />
           </Route>
           <Route path={"/login"} element={<Login />} />
           <Route path={"/register"} element={<Signup />} />

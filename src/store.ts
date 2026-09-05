@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from "redux-persist/lib/storage";
 import productSlice from './feature/product/product.slice'
 import cartSlice from './feature/cart/cart.slice'
+import wishlistSlice from './feature/wishlist/wishlist.slice'
 
 const persistConfig = {
     key: 'root',
@@ -12,15 +13,18 @@ const persistConfig = {
 
 const persistedAuthReducer = persistReducer(persistConfig, authSlice);
 
-const persistedProductReducer = persistReducer(persistConfig, productSlice)
+const persistedProductReducer = persistReducer(persistConfig, productSlice);
 
-const persistedCartReducer = persistReducer(persistConfig, cartSlice)
+const persistedCartReducer = persistReducer(persistConfig, cartSlice);
+
+const persistedWishlistReducer = persistReducer(persistConfig, wishlistSlice);
 
 export const store = configureStore({
     reducer: {
       auth : persistedAuthReducer, 
       product : persistedProductReducer,
-      cart : persistedCartReducer
+      cart : persistedCartReducer,
+      wishlist : persistedWishlistReducer
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

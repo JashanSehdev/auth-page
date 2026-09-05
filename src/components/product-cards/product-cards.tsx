@@ -9,7 +9,7 @@ function ProductCards(prop : {readonly vendor : boolean}) {
     const user = useSelector((state : RootState) => state.auth.user);
     let productList = products
     if (prop.vendor) {
-        productList = products.filter((item) => item.user_email === user?.email)
+        productList = products.filter((item) => item.publisher_email === user?.email)
     }
   return (
     <div className={styles.container}>
@@ -17,11 +17,12 @@ function ProductCards(prop : {readonly vendor : boolean}) {
         productList.map((item) => (
             <ProductCard 
               key={item.id} 
-              email= {item.user_email} 
+              email= {item.publisher_email} 
               image = {item.img_url}
               name = {item.product_name}
               description={item.description}
               price = {item.price}
+              id = {item.id}
             />
         ))
       }

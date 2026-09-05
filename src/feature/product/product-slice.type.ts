@@ -6,15 +6,15 @@ export type InitialState = {
 
 export type Product = {
     id : string,
-    user_email : string
+    publisher_email : string
     product_name : string,
     description : string,
     img_url : string,
-    price : number
+    price : number,
 }
 
 export type InputProduct = {
-    user_email : string
+    publisher_email : string
     product_name : string,
     description : string,
     img_url : string,

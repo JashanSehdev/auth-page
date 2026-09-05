@@ -1,8 +1,8 @@
 
 
 .container {
+    margin-top: 50px;
     display: block;
-    height: 100vh;
     background-size: 'cover';
     background-position: 'center';
     height: '100vh';

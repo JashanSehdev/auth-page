@@ -33,7 +33,7 @@ export default function AddProductForm() {
 
   const onSubmit = async (data: AddProductSchemaOutput) => {
     const uniqueId = crypto.randomUUID();
-    dispatch(addProduct({ id: uniqueId, user_email: user?.email || "none", ...data }));
+    dispatch(addProduct({ id: uniqueId, publisher_email: user?.email || "none", ...data }));
   };
 
   return (
