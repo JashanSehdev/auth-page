@@ -14,8 +14,8 @@ function Home() {
       navigate("/login");
     } 
   });
-  return <div style={{backgroundImage : `url(${background_image})`}}>
-    <ProductCards vendor={false} />
+  return <div>
+    <ProductCards AddToCartButton favourite/>
 
   </div>;
 }

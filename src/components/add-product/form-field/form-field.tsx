@@ -23,9 +23,9 @@ const FormField = <TFieldValues extends FieldValues>({
 }: FormFieldProps<TFieldValues>) => (
   <>
     <TextField
-    fullWidth
+      fullWidth
       id="outlined-basic"
-      label={name}
+      label={placeholder}
       variant="outlined"
       placeholder={placeholder}
       type={type}

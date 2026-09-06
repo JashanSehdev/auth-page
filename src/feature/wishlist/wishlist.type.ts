@@ -15,3 +15,8 @@ export type wishlistProduct = {
     wishlist_date : Date
 
 }
+
+export type RemoveFromWishlist = {
+    user_email : string,
+    id : string
+}

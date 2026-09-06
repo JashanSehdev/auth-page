@@ -9,6 +9,7 @@ import PrivateRoute from './Routing/privateRoute';
 import Navbar from './components/navbar/navbar';
 import Home from './pages/Home/Home.page'
 import Wishlist from './pages/wishlist/wishlist.page';
+import Cart from './pages/cart/cart.page';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path={"/dashboard"} element={<Dashboard/>} />
             <Route path={"/"} element={<Home/>} />
             <Route path={"/wishlist"} element={<Wishlist/>} />
+            <Route path={"/cart"} element={<Cart/>} />
           </Route>
           <Route path={"/login"} element={<Login />} />
           <Route path={"/register"} element={<Signup />} />

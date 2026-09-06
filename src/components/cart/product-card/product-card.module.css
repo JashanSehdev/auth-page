@@ -1,0 +1,38 @@
+.media {
+    width: 200px;
+
+}
+
+.container {
+    display: flex;
+    gap: 10px;
+    background-color: bisque;
+    align-items: center;
+    width: 100%;
+}
+
+.title {
+    color: blueviolet;
+    font-weight: 600;
+}
+
+.details {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.publisher {
+}
+
+.sub_details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+}
+.price{
+    
+}

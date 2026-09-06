@@ -23,6 +23,7 @@ const FormDescription = <TFieldValues extends FieldValues>({
 }: FormFieldProps<TFieldValues>) => (
   <>
    <TextField
+          fullWidth
           id="outlined-multiline-static"
           placeholder={placeholder}
           type={type}

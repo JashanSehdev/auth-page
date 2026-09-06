@@ -18,6 +18,7 @@ export default function RenderWishListItems () {
                     price={item.price}
                     publisher_email={item.publisher_email}
                     wishlist_date={item.wishlist_date}
+                    user_email = {user.email}
                 /> : null
             ))
         }

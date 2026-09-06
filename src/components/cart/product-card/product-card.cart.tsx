@@ -1,18 +1,17 @@
-
-import { Box, Button, IconButton } from "@mui/material"
-import { WishlistCard } from "./wishlist-product-type"
+import { useDispatch } from 'react-redux';
+import styles from './product-card.module.css'
+import { Box, Button, CardMedia, IconButton } from '@mui/material';
+import { CartCardProp } from './product-card.cart.type';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
-import { removeFromWishlist } from "../../feature/wishlist/wishlist.slice";
-import { useDispatch } from "react-redux";
-import CardMedia from '@mui/material/CardMedia';
-import styles from './wish-list-card.module.css'
+import { removeFromCart } from '../../../feature/cart/cart.slice';
 
-export default function WishListCard(prop: WishlistCard) {
+
+export default function CartCard(prop: CartCardProp) {
     const dispatch = useDispatch();
     const handleDelete = () => {
-        dispatch(removeFromWishlist({user_email : prop.user_email , id : prop.id}))
+        dispatch(removeFromCart({user_email : prop.user_email, id : prop.id}))
     }
-    const date = new Date(prop.wishlist_date).toLocaleDateString('en-GB', {
+    const date = new Date(prop.cart_date).toLocaleDateString('en-GB', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'

@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
 import { addProduct } from "../../../feature/product/product.slice";
 import { Button } from "@mui/material";
-import FormDescription from "../form-description";
+import FormDescription from "../form-description/form-description";
 
 export default function AddProductForm() {
   const dispatch = useDispatch<AppDispatch>();
@@ -69,7 +69,7 @@ export default function AddProductForm() {
       />
       <FormField
         type="text"
-        placeholder="Image Url"
+        placeholder="Image URL"
         name="img_url"
         register={register}
         error={errors.img_url}
