@@ -1,0 +1,21 @@
+.container {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.root {
+    padding: 3rem;
+}
+
+.image {
+    width: 45%;
+}
+
+.details {
+    padding: 2rem 1rem;
+
+}
+.details Button{
+    margin-bottom: 1rem;
+}

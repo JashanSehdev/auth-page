@@ -28,7 +28,7 @@ const cartSlice  = createSlice({
                 existingProduct.quantity += 1;
                 return;
             }
-            state.cart.push({...action.payload, quantity : 1});
+            state.cart.push({...action.payload, quantity : 1, cart_date : new Date(Date.now())});
         },
         removeFromCart : (state, action : PayloadAction<{user_email : string, id : string}>) => {
             state.cart = state.cart.filter((item : Cart) => item.id !== action.payload.id && item.user_email === action.payload.user_email)

@@ -1,7 +1,8 @@
 
 export type InitialState = {
     products : Product[],
-    error : string | undefined
+    error : string | undefined,
+    product : Product | undefined
 }
 
 export type Product = {

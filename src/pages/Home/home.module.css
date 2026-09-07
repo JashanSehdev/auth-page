@@ -1,13 +1,12 @@
+.search{
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
     height: 100vh;
     gap: 20px;
     padding: 50px 50px; 
-}
-
-.search_bar {
-    color: white;
-    border-radius: 5px;
-    padding: 1rem 5%;
 }

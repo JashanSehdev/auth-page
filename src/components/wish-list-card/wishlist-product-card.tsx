@@ -1,11 +1,12 @@
 
-import { Box, Button, IconButton } from "@mui/material"
+import { Box, IconButton } from "@mui/material"
 import { WishlistCard } from "./wishlist-product-type"
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import { removeFromWishlist } from "../../feature/wishlist/wishlist.slice";
 import { useDispatch } from "react-redux";
 import CardMedia from '@mui/material/CardMedia';
 import styles from './wish-list-card.module.css'
+import AddToCartButton from "../add-to-cart-button/add-to-cart-button";
 
 export default function WishListCard(prop: WishlistCard) {
     const dispatch = useDispatch();
@@ -41,7 +42,7 @@ export default function WishListCard(prop: WishlistCard) {
                 </div>
 
                 <div>
-                    <Button>Add To Cart</Button>
+                    <AddToCartButton id={prop.id} email={prop.user_email} />
                     <IconButton aria-label="delete wishlist" onClick={handleDelete}>
                         <DeleteForeverRoundedIcon />
                     </IconButton>

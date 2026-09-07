@@ -18,5 +18,4 @@ export type InputCart = {
     img_url : string,
     price : number,
     user_email : string,
-    cart_date : Date
 }

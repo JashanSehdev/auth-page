@@ -9,7 +9,8 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import styles from "./product-card.module.css";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import EditSharpIcon from '@mui/icons-material/EditSharp';
+
 import {
   addToWishlist,
   removeFromWishlist,
@@ -17,10 +18,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { wishlistProduct } from "../../feature/wishlist/wishlist.type";
 import { RootState } from "../../store";
-import NumberSpinner from "../spinner/number-spinner";
-import { addToCart, setAddToCart } from "../../feature/cart/cart.slice";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
-import { deleteProduct } from "../../feature/product/product.slice";
+import { deleteProduct, setProduct } from "../../feature/product/product.slice";
+import { Product } from "../../feature/product/product-slice.type";
+import { useNavigate } from "react-router-dom";
+import AddToCartButton from "../add-to-cart-button/add-to-cart-button";
+import React from "react";
 
 type Prop = {
   image: string;
@@ -33,13 +36,11 @@ type Prop = {
   addToCartButton?: boolean;
   deleteProduct?: boolean;
   favourite?: boolean;
+  edit ?: boolean;
 };
 
 export default function ProductCard(prop: Prop) {
-  const cart = useSelector((state: RootState) => state.cart.cart);
-  const cartProduct = cart.find(
-    (item) => item.id === prop.id && item.user_email === prop.user_email,
-  );
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const wishlist = useSelector((state: RootState) => state.wishlist.wishlist);
   const isWishlisted = wishlist.some(
@@ -58,7 +59,8 @@ export default function ProductCard(prop: Prop) {
   };
 
   // handlers
-  const handleWishList = () => {
+  const handleWishList : React.MouseEventHandler<HTMLButtonElement>  = (e) => {
+    e.stopPropagation()
     if (!isWishlisted) dispatch(addToWishlist(wishlistProduct));
     else
       dispatch(
@@ -66,33 +68,27 @@ export default function ProductCard(prop: Prop) {
       );
   };
 
-  const HandleAddToCart = () => {
-    const productToCart = {
-      id: prop.id,
-      publisher_email: prop.publisher_email,
-      product_name: prop.name,
-      description: prop.description,
-      img_url: prop.image,
-      price: prop.price,
-      user_email: prop.user_email,
-      cart_date: new Date(Date.now()),
-    };
-    dispatch(addToCart(productToCart));
-  };
-
-  const HandleDeleteProduct = () => {
+  const HandleDeleteProduct : React.MouseEventHandler<HTMLButtonElement>= (e) => {
+    e.stopPropagation()
     dispatch(deleteProduct(prop.id));
   };
 
-  const handleCart = (e: any) => {
-    console.log(e);
-    dispatch(
-      setAddToCart({ user_email: prop.user_email, id: prop.id, quantity: e }),
-    );
-  };
+
+  const handleSetProduct = () => {
+    const product : Product = {
+      id : prop.id,
+      publisher_email : prop.user_email,
+      product_name : prop.name,
+      description : prop.description,
+      img_url : prop.image,
+      price : prop.price,
+    }
+    dispatch(setProduct(product));
+    navigate("/product")
+  }
 
   return (
-    <Card className={styles.container}>
+    <Card className={styles.container} onClick={handleSetProduct}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -125,27 +121,24 @@ export default function ProductCard(prop: Prop) {
             <FavoriteIcon />
           </IconButton>
         ) : null}
-
-        {prop.addToCartButton ? (
-          !cartProduct ? (
-            <IconButton aria-label="shopping cart" onClick={HandleAddToCart}>
-              <ShoppingCartIcon />
-            </IconButton>
-          ) : (
-            <NumberSpinner
-              onValueChange={handleCart}
-              size="small"
-              defaultValue={cartProduct?.quantity}
-              min={0}
-              max={100}
-            />
-          )
-        ) : null}
+        
+        {
+          prop.addToCartButton && <AddToCartButton email={prop.user_email} id={prop.id} />
+        }
+        
         {prop.deleteProduct ? (
           <IconButton aria-label="shopping cart" onClick={HandleDeleteProduct}>
             <DeleteForeverRoundedIcon />
           </IconButton>
         ) : null}
+
+        {
+          prop.edit && (
+            <IconButton aria-label="shopping cart" >{/* need to handle edit product*/}
+              <EditSharpIcon />
+            </IconButton>
+          )
+        }
       </CardActions>
     </Card>
   );

@@ -4,7 +4,7 @@ import { Box, Button, CardMedia, IconButton } from '@mui/material';
 import { CartCardProp } from './product-card.cart.type';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import { removeFromCart } from '../../../feature/cart/cart.slice';
-
+import AddToCartButton from '../../add-to-cart-button/add-to-cart-button';
 
 export default function CartCard(prop: CartCardProp) {
     const dispatch = useDispatch();
@@ -40,7 +40,7 @@ export default function CartCard(prop: CartCardProp) {
                 </div>
 
                 <div>
-                    <Button>Add To Cart</Button>
+                    <AddToCartButton id={prop.id} email={prop.user_email} />
                     <IconButton aria-label="delete wishlist" onClick={handleDelete}>
                         <DeleteForeverRoundedIcon />
                     </IconButton>
