@@ -6,7 +6,7 @@ import Dashboard from './pages/dashboard/dashboard';
 import Login from './pages/login/login.page';
 import PrivateRoute from './Routing/privateRoute';
 import Navbar from './components/navbar/navbar';
-import Home from './pages/home/home.page'
+import Home from './pages/home/Home.page'
 import Wishlist from './pages/wishlist/wishlist.page';
 import Cart from './pages/cart/cart.page';
 import ProductPage from './pages/product/product.page';

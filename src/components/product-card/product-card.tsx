@@ -17,13 +17,15 @@ import {
 } from "../../feature/wishlist/wishlist.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { wishlistProduct } from "../../feature/wishlist/wishlist.type";
-import { RootState } from "../../store";
+import { RootState, useAppDispatch } from "../../store";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import { deleteProduct, setProduct } from "../../feature/product/product.slice";
 import { Product } from "../../feature/product/product-slice.type";
 import { useNavigate } from "react-router-dom";
 import AddToCartButton from "../add-to-cart-button/add-to-cart-button";
 import React from "react";
+import { delete_Product } from "../../feature/product/product-list/product.actions";
+import EditDialog from "../edit-product/edit-product";
 
 type Prop = {
   image: string;
@@ -41,12 +43,22 @@ type Prop = {
 
 export default function ProductCard(prop: Prop) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const wishlist = useSelector((state: RootState) => state.wishlist.wishlist);
   const isWishlisted = wishlist.some(
     (item) => item.id === prop.id && item.user_email === prop.user_email,
   );
   const user_email: string = prop.user_email;
+
+  const product : Product = {
+    publisher_email: prop.publisher_email,
+    id : prop.id,
+    price : prop.price,
+    img_url: prop.image,
+    product_name: prop.name,
+    description : prop.description    
+    
+  }
   const wishlistProduct: wishlistProduct = {
     img_url: prop.image,
     product_name: prop.name,
@@ -70,7 +82,7 @@ export default function ProductCard(prop: Prop) {
 
   const HandleDeleteProduct : React.MouseEventHandler<HTMLButtonElement>= (e) => {
     e.stopPropagation()
-    dispatch(deleteProduct(prop.id));
+    dispatch(delete_Product(Number.parseInt(prop.id)));
   };
 
 
@@ -92,7 +104,7 @@ export default function ProductCard(prop: Prop) {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {prop.publisher_email.charAt(0).toUpperCase()}
+            {prop.publisher_email?.charAt(0).toUpperCase()}
           </Avatar>
         }
         title={prop.name}
@@ -122,9 +134,9 @@ export default function ProductCard(prop: Prop) {
           </IconButton>
         ) : null}
         
-        {
+        {/* {
           prop.addToCartButton && <AddToCartButton email={prop.user_email} id={prop.id} />
-        }
+        } */}
         
         {prop.deleteProduct ? (
           <IconButton aria-label="shopping cart" onClick={HandleDeleteProduct}>
@@ -134,9 +146,7 @@ export default function ProductCard(prop: Prop) {
 
         {
           prop.edit && (
-            <IconButton aria-label="shopping cart" >{/* need to handle edit product*/}
-              <EditSharpIcon />
-            </IconButton>
+            <EditDialog product={product}/>
           )
         }
       </CardActions>

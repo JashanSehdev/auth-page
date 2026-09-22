@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InitialState, InputProduct, Product } from "./product-slice.type";
 import { useId } from "react";
+import { fetchAllProduct } from "./product-list/product.actions";
 
 const currentProduct : Product = {
     id : "0ab6ea86-3199-43bf-8c5f-990888832ef5",
@@ -45,6 +46,12 @@ const productSlice = createSlice({
         }
     
     },
+
+    extraReducers:(builder) => {
+        builder.addCase(fetchAllProduct.fulfilled, (state, action ) => {
+            state.products = action.payload
+        })
+    }
 })
 
 export const {addProduct, deleteProduct, setProduct ,unsetProduct} = productSlice.actions

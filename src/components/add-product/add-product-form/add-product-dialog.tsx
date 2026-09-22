@@ -7,20 +7,21 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import styles from "./add-product.module.css";
 import {
-  AddProductSchemaInput,
-  AddProductSchemaOutput,
   addProductSchema,
+  addProductType,
 } from "../type/add-product.type";
 import FormField from "../form-field/form-field";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store";
+import { AppDispatch, RootState, useAppDispatch } from "../../../store";
 import { addProduct } from "../../../feature/product/product.slice";
 import FormDescription from "../form-description/form-description";
 import { Box } from "@mui/material";
+import { postProduct } from "../../../feature/product/product-list/product.actions";
+import { InputProduct } from "../../../feature/product/product-slice.type";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -32,6 +33,7 @@ const Transition = React.forwardRef(function Transition(
 });
 
 export default function AlertDialogSlide() {
+  const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -42,33 +44,37 @@ export default function AlertDialogSlide() {
     setOpen(false);
   };
 
-  const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.auth.user);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AddProductSchemaInput, any, AddProductSchemaOutput>({
+  } = useForm<addProductType>({
     resolver: zodResolver(addProductSchema),
     defaultValues: {
       product_name: "",
       description: "",
-      price: 0,
+      price: '',
       img_url: "",
     },
   });
 
-  const onSubmit = async (data: AddProductSchemaOutput) => {
-    const uniqueId = crypto.randomUUID();
-    dispatch(
-      addProduct({
-        id: uniqueId,
-        publisher_email: user?.email || "none",
-        ...data,
-      }),
-    );
+  const onSubmit : SubmitHandler<addProductType> = async (data: addProductType) => {
 
+    const sendData : InputProduct = {
+      ...data,
+      publisher_email: user?.email || "none",
+      price : Number.parseInt(data.price)
+    }
+    try {
+      // 2. Unwrap the thunk result to handle promise resolution/rejection locally
+      await dispatch(postProduct(sendData)).unwrap();
+      handleClose(); // Close dialog only on success
+    } catch (error) {
+      console.error("Failed to add product:", error);
+      // Keep dialog open so user sees form validation or global error banners
+    }
     setOpen(false);
   };
 
@@ -112,7 +118,7 @@ export default function AlertDialogSlide() {
             />
 
             <FormField
-              type="number"
+              type="text"
               placeholder="price"
               name="price"
               register={register}

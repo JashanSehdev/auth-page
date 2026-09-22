@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import productSlice from './feature/product/product.slice'
 import cartSlice from './feature/cart/cart.slice'
 import wishlistSlice from './feature/wishlist/wishlist.slice'
+import { useDispatch } from "react-redux";
 
 const persistConfig = {
     key: 'root',
@@ -39,4 +40,5 @@ export const persistor = persistStore(store);
 // Infexport const persistor = persistStore(store);er the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;

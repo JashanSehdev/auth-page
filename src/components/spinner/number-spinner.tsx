@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NumberField as BaseNumberField } from '@base-ui/react';
+import { NumberField as BaseNumberField } from '@base-ui/react/number-field';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
@@ -27,7 +27,7 @@ export default function NumberSpinner({
   return (
     <BaseNumberField.Root
       {...other}
-      render={(props, state) => (
+      render={(props , state) => (
         <FormControl
           size={size}
           ref={props.ref}
