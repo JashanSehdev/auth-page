@@ -58,11 +58,12 @@ function Home() {
               description={item.description}
               price={item.price}
               id={item.id}
+              favourite
             />
           ))}
         </div>
       </div>
-      <ProductCards AddToCartButton favourite />
+      {/* <ProductCards AddToCartButton favourite /> */}
     </div>
   );
 }

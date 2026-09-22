@@ -29,7 +29,7 @@ export default function Dashboard () {
             </Box>
             
             <ProductCards vendor deleteProductButton edit />
-        </Box>
+        </Box>  
         // <div className={styles.container} >
         //     <div className={styles.callingCard}>
         //     <h1>Hi {user?.name}</h1>

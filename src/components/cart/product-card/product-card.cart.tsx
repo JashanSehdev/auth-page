@@ -3,13 +3,15 @@ import styles from './product-card.module.css'
 import { Box, Button, CardMedia, IconButton } from '@mui/material';
 import { CartCardProp } from './product-card.cart.type';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
-import { removeFromCart } from '../../../feature/cart/cart.slice';
-import AddToCartButton from '../../add-to-cart-button/add-to-cart-button';
+
+import { delete_Product } from '../../../feature/product/product-list/product.actions';
+import { AppDispatch } from '../../../store';
 
 export default function CartCard(prop: CartCardProp) {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const handleDelete = () => {
-        dispatch(removeFromCart({user_email : prop.user_email, id : prop.id}))
+        const id : number = Number.parseInt(prop.id);
+        dispatch(delete_Product(id))
     }
     const date = new Date(prop.cart_date).toLocaleDateString('en-GB', {
         day: 'numeric',
@@ -40,7 +42,7 @@ export default function CartCard(prop: CartCardProp) {
                 </div>
 
                 <div>
-                    <AddToCartButton id={prop.id} email={prop.user_email} />
+                    {/* <AddToCartButton id={prop.id} email={prop.user_email} /> */}
                     <IconButton aria-label="delete wishlist" onClick={handleDelete}>
                         <DeleteForeverRoundedIcon />
                     </IconButton>

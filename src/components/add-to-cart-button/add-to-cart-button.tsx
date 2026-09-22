@@ -11,9 +11,7 @@ type Prop = {
 
 export default function AddToCartButton(prop: Prop) {
   const cart = useSelector((state: RootState) => state.cart.cart);
-  const inCart = cart.some(
-    (item) => item.id === prop.id && item.user_email === prop.email,
-  );
+  const inCart = cart.some((item) => item.id === prop.id && item.user_email === prop.email);
   const products = useSelector((state: RootState) => state.product.products);
   const dispatch = useDispatch();
   const product = products.find((item) => item.id === prop.id);
